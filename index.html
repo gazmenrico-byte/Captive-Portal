@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STEM WiFi - A WiFi Access-Based Incentive Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="plastic bottle-container">
+    <!-- Floating background water bubbles -->
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    
+    <div class="portal-card">
+      <!-- Simulated bottle cap at the top -->
+      <div class="bottle-cap"></div>
+      
+      <!-- Header / Logo -->
+      <div class="header-section">
+        <div class="water-icon">💧</div>
+        <h1>STEM WiFi - A WiFi Access-Based Incentive Project</h1>
+        <p class="subtitle">Stay Waste-Free, Stay Online.</p>
+      </div>
+
+      <!-- Step 1: Request OTP -->
+      <div id="step-request" class="form-step active">
+        <p class="instruction-text">Enter your mobile number to receive a temporary verification code via SMS.</p>
+        <div class="input-group">
+          <span class="input-addon">+63</span>
+          <input type="tel" id="phone-number" placeholder="Enter phone number" maxlength="10">
+        </div>
+        <button id="btn-send-otp" class="btn-primary">Get Code</button>
+      </div>
+
+      <!-- Step 2: Verify OTP -->
+      <div id="step-verify" class="form-step">
+        <p class="instruction-text">We sent a 4-digit code. <br>(For this demo, your code is: <strong id="demo-code">1234</strong>)</p>
+        <div class="otp-inputs">
+          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
+        </div>
+        <button id="btn-verify-otp" class="btn-primary">Verify & Connect</button>
+        <button id="btn-back" class="btn-secondary">Go Back</button>
+      </div>
+
+      <!-- Step 3: Success Connection -->
+      <div id="step-success" class="form-step">
+        <div class="success-icon">🌀</div>
+        <h2>You're Online!</h2>
+        <p class="instruction-text">Your high-speed connection is now active. Keep recycling and stay refreshed!</p>
+        <div class="wave-loader">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
