@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STEM WiFi - A WiFi Access-Based Incentive Project</title>
-  <link rel="icon" type="image/jpeg" href="download.jpg" />
+
+  <title>Bote2WiFi - A WiFi Access-Based Incentive Project</title>
+
+  <link rel="icon" type="image/jpeg" href="download.jpg">
+
   <style>
     :root {
       --primary-blue: #00a8ff;
@@ -22,26 +25,58 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+      background: linear-gradient(
+        135deg,
+        #e0f2fe 0%,
+        #bae6fd 50%,
+        #7dd3fc 100%
+      );
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       min-height: 100vh;
       overflow: hidden;
     }
 
-    /* Background floating water droplets */
+    /* Floating water bubbles */
+
     .bubble {
       position: absolute;
       background: rgba(255, 255, 255, 0.4);
       border-radius: 50%;
-      box-shadow: inset -4px -4px 12px rgba(0,0,0,0.05), inset 4px 4px 12px rgba(255,255,255,0.7);
-    }
-    .b1 { width: 80px; height: 80px; top: 10%; left: 10%; filter: blur(1px); }
-    .b2 { width: 40px; height: 40px; bottom: 15%; right: 10%; }
-    .b3 { width: 120px; height: 120px; bottom: -20px; left: -20px; opacity: 0.6; }
 
-    /* Main Card Container styled like a modern PET bottle */
+      box-shadow:
+        inset -4px -4px 12px rgba(0,0,0,0.05),
+        inset 4px 4px 12px rgba(255,255,255,0.7);
+    }
+
+    .b1 {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      left: 10%;
+      filter: blur(1px);
+    }
+
+    .b2 {
+      width: 40px;
+      height: 40px;
+      bottom: 15%;
+      right: 10%;
+    }
+
+    .b3 {
+      width: 120px;
+      height: 120px;
+      bottom: -20px;
+      left: -20px;
+      opacity: 0.6;
+    }
+
+    /* Main bottle container */
+
     .bottle-container {
       position: relative;
       width: 90%;
@@ -50,35 +85,58 @@
 
     .portal-card {
       position: relative;
+
       background: var(--bottle-blue);
+
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+
       border-radius: 40px;
+
       border: 1px solid rgba(255, 255, 255, 0.6);
+
       padding: 40px 30px;
+
       box-shadow:
         0 20px 40px rgba(14, 165, 233, 0.15),
         inset 0 12px 24px var(--reflection-white),
         inset 0 -12px 24px rgba(2, 132, 199, 0.15);
+
       overflow: hidden;
     }
 
-    /* Simulated Blue Bottle Cap at the top */
+    /* Bottle cap */
+
     .bottle-cap {
       position: absolute;
+
       top: 0;
       left: 50%;
+
       transform: translateX(-50%);
+
       width: 95px;
       height: 16px;
-      background: linear-gradient(to right, #0284c7, #38bdf8, #0284c7);
+
+      background:
+        linear-gradient(
+          to right,
+          #0284c7,
+          #38bdf8,
+          #0284c7
+        );
+
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
+
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
+    /* Header */
+
     .header-section {
       text-align: center;
+
       margin-bottom: 30px;
       margin-top: 10px;
     }
@@ -86,15 +144,20 @@
     .water-icon {
       font-size: 3rem;
       margin-bottom: 10px;
+
       animation: float 3s ease-in-out infinite;
     }
 
     h1 {
       color: var(--dark-blue);
+
       font-size: 1.8rem;
       font-weight: 700;
+
       margin-bottom: 4px;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+
+      text-shadow:
+        1px 1px 2px rgba(255, 255, 255, 0.8);
     }
 
     .subtitle {
@@ -102,10 +165,13 @@
       font-size: 0.9rem;
     }
 
-    /* Multi-step screen state management */
+    /* Form screens */
+
     .form-step {
       display: none;
-      animation: fadeIn 0.4s ease-out forwards;
+
+      animation:
+        fadeIn 0.4s ease-out forwards;
     }
 
     .form-step.active {
@@ -114,80 +180,98 @@
 
     .instruction-text {
       color: #334155;
+
       font-size: 0.95rem;
       line-height: 1.5;
+
       text-align: center;
+
       margin-bottom: 25px;
     }
 
-    /* Input fields */
+    /* Input */
+
     .input-group {
       display: flex;
+
       background: rgba(255, 255, 255, 0.6);
+
       border: 1px solid rgba(255, 255, 255, 0.8);
+
       border-radius: 20px;
+
       padding: 12px 20px;
-      margin-bottom: 25px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+
+      margin-bottom: 20px;
+
+      box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.03);
     }
 
     .input-addon {
       color: #64748b;
+
       font-weight: bold;
+
       margin-right: 10px;
     }
 
     input {
       border: none;
+
       background: transparent;
+
       outline: none;
+
       color: var(--text-main);
+
       font-size: 1.1rem;
+
       width: 100%;
     }
 
-    /* OTP Code Box Grid */
-    .otp-inputs {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 25px;
+    input::placeholder {
+      color: #64748b;
     }
 
-    .otp-digit {
-      width: 55px;
-      height: 55px;
-      background: rgba(255, 255, 255, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 15px;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--dark-blue);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-      transition: all 0.2s ease;
-    }
+    /* Buttons */
 
-    .otp-digit:focus {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-    }
-
-    /* Ocean Blue Buttons */
     .btn-primary {
       display: block;
+
       width: 100%;
+
       padding: 15px;
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+
+      background:
+        linear-gradient(
+          135deg,
+          #38bdf8 0%,
+          #0284c7 100%
+        );
+
       border: none;
+
       border-radius: 25px;
+
       color: white;
+
       font-size: 1rem;
       font-weight: bold;
+
       cursor: pointer;
-      box-shadow: 0 8px 16px rgba(2, 132, 199, 0.25);
-      transition: transform 0.1s ease, box-shadow 0.2s ease;
+
+      box-shadow:
+        0 8px 16px rgba(2, 132, 199, 0.25);
+
+      transition:
+        transform 0.1s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      box-shadow:
+        0 10px 20px rgba(2, 132, 199, 0.35);
     }
 
     .btn-primary:active {
@@ -196,192 +280,553 @@
 
     .btn-secondary {
       display: block;
+
       width: 100%;
+
       padding: 10px;
+
       background: transparent;
+
       border: none;
+
       color: #0369a1;
+
       font-size: 0.9rem;
+
       font-weight: 600;
+
       cursor: pointer;
+
       margin-top: 15px;
+
       text-decoration: underline;
     }
 
-    /* Visual animations */
-    .success-icon {
-      font-size: 4rem;
+    /* Error */
+
+    .error-message {
+      display: none;
+
+      color: #dc2626;
+
+      background: rgba(254, 226, 226, 0.7);
+
+      border: 1px solid rgba(248, 113, 113, 0.5);
+
+      border-radius: 12px;
+
+      padding: 10px;
+
       text-align: center;
+
+      font-size: 0.85rem;
+
       margin-bottom: 15px;
-      animation: spin 6s linear infinite;
     }
 
+    .error-message.show {
+      display: block;
+    }
+
+    /* WiFi information */
+
+    .wifi-box {
+      background: rgba(255, 255, 255, 0.55);
+
+      border: 1px solid rgba(255, 255, 255, 0.8);
+
+      border-radius: 20px;
+
+      padding: 18px;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .wifi-label {
+      color: #64748b;
+
+      font-size: 0.78rem;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      margin-bottom: 5px;
+    }
+
+    .wifi-value {
+      color: #0369a1;
+
+      font-size: 1.1rem;
+
+      font-weight: 700;
+
+      word-break: break-word;
+    }
+
+    .wifi-password {
+      letter-spacing: 1px;
+    }
+
+    .success-icon {
+      font-size: 4rem;
+
+      text-align: center;
+
+      margin-bottom: 15px;
+
+      animation:
+        spin 6s linear infinite;
+    }
+
+    .success-title {
+      text-align: center;
+
+      color: var(--dark-blue);
+
+      margin-bottom: 10px;
+    }
+
+    /* Copy confirmation */
+
+    .copy-message {
+      display: none;
+
+      text-align: center;
+
+      color: #047857;
+
+      background: rgba(209, 250, 229, 0.7);
+
+      border-radius: 12px;
+
+      padding: 9px;
+
+      margin-top: 12px;
+
+      font-size: 0.85rem;
+
+      font-weight: 600;
+    }
+
+    .copy-message.show {
+      display: block;
+    }
+
+    /* Animations */
+
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
-    /* Fluid filling animation bar for the success state */
-    .wave-loader {
-      position: relative;
-      width: 120px;
-      height: 12px;
-      margin: 30px auto 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .wave {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, #38bdf8, #0284c7, #38bdf8);
-      background-size: 200% 100%;
-      animation: waveMotion 2s linear infinite;
-    }
-
-    @keyframes waveMotion {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
   </style>
 </head>
+
+
 <body>
 
+  <!-- Floating bubbles -->
+
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+
+
   <div class="bottle-container">
-    <!-- Floating background water bubbles -->
-    <div class="bubble b1"></div>
-    <div class="bubble b2"></div>
-    <div class="bubble b3"></div>
 
     <div class="portal-card">
-      <!-- Simulated bottle cap at the top -->
+
+      <!-- Bottle cap -->
+
       <div class="bottle-cap"></div>
 
-      <!-- Header / Logo -->
+
+      <!-- Header -->
+
       <div class="header-section">
-        <div class="water-icon">💧</div>
-        <h1>STEM WiFi - A WiFi Access-Based Incentive Project</h1>
-        <p class="subtitle">Stay Waste-Free, Stay Online.</p>
+
+        <div class="water-icon">
+          💧
+        </div>
+
+        <h1>
+          Bote2WiFi
+        </h1>
+
+        <p class="subtitle">
+          Stay Waste-Free, Stay Online.
+        </p>
+
       </div>
 
-      <!-- Step 1: Request OTP -->
-      <div id="step-request" class="form-step active">
-        <p class="instruction-text">Enter your mobile number to receive a temporary verification code via SMS.</p>
+
+      <!-- ===================================== -->
+      <!-- STEP 1: ACCESS PASSWORD -->
+      <!-- ===================================== -->
+
+      <div
+        id="step-password"
+        class="form-step active"
+      >
+
+        <p class="instruction-text">
+
+          Enter your Bote2WiFi access password
+          to reveal the Wi-Fi connection details.
+
+        </p>
+
+
         <div class="input-group">
-          <span class="input-addon">+63</span>
-          <input type="tel" id="phone-number" placeholder="Enter phone number" maxlength="10">
+
+          <span class="input-addon">
+            🔒
+          </span>
+
+          <input
+            type="password"
+            id="access-password"
+            placeholder="Enter access password"
+            autocomplete="off"
+          >
+
         </div>
-        <button id="btn-send-otp" class="btn-primary">Get Code</button>
+
+
+        <div
+          id="error-message"
+          class="error-message"
+        >
+          Incorrect password. Please try again.
+        </div>
+
+
+        <button
+          id="btn-unlock"
+          class="btn-primary"
+        >
+          Unlock WiFi
+        </button>
+
       </div>
 
-      <!-- Step 2: Verify OTP -->
-      <div id="step-verify" class="form-step">
-        <p class="instruction-text">Enter the 4-digit verification code sent to your mobile phone.</p>
-        <div class="otp-inputs">
-          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]*" inputmode="numeric">
+
+      <!-- ===================================== -->
+      <!-- STEP 2: WIFI DETAILS -->
+      <!-- ===================================== -->
+
+      <div
+        id="step-wifi"
+        class="form-step"
+      >
+
+        <div class="success-icon">
+          💧
         </div>
-        <button id="btn-verify-otp" class="btn-primary">Verify & Connect</button>
-        <button id="btn-back" class="btn-secondary">Go Back</button>
+
+
+        <h2 class="success-title">
+          Access Granted!
+        </h2>
+
+
+        <p class="instruction-text">
+
+          Your Wi-Fi connection details
+          are shown below.
+
+        </p>
+
+
+        <!-- WiFi name -->
+
+        <div class="wifi-box">
+
+          <div class="wifi-label">
+            Wi-Fi Network
+          </div>
+
+          <div
+            class="wifi-value"
+            id="wifi-name"
+          >
+            Bote2WiFi
+          </div>
+
+        </div>
+
+
+        <!-- WiFi password -->
+
+        <div class="wifi-box">
+
+          <div class="wifi-label">
+            Wi-Fi Password
+          </div>
+
+          <div
+            class="wifi-value wifi-password"
+            id="wifi-password"
+          >
+            BoteWiFi2026
+          </div>
+
+        </div>
+
+
+        <button
+          id="btn-copy"
+          class="btn-primary"
+        >
+          Copy Wi-Fi Password
+        </button>
+
+
+        <div
+          id="copy-message"
+          class="copy-message"
+        >
+          ✓ Wi-Fi password copied!
+        </div>
+
+
+        <button
+          id="btn-back"
+          class="btn-secondary"
+        >
+          Lock Wi-Fi Details
+        </button>
+
       </div>
 
-      <!-- Step 3: Success Connection -->
-      <div id="step-success" class="form-step">
-        <div class="success-icon">🌀</div>
-        <h2>You're Online!</h2>
-        <p class="instruction-text">Your high-speed connection is now active. Keep recycling and stay refreshed!</p>
-        <div class="wave-loader">
-          <div class="wave"></div>
-        </div>
-      </div>
     </div>
+
   </div>
 
+
   <script>
-    const stepRequest = document.getElementById('step-request');
-    const stepVerify = document.getElementById('step-verify');
-    const stepSuccess = document.getElementById('step-success');
 
-    const btnSendOtp = document.getElementById('btn-send-otp');
-    const btnVerifyOtp = document.getElementById('btn-verify-otp');
-    const btnBack = document.getElementById('btn-back');
+    // ==========================================
+    // Bote2WiFi SETTINGS
+    // ==========================================
 
-    const phoneNumberInput = document.getElementById('phone-number');
-    const otpInputs = document.querySelectorAll('.otp-digit');
+    /*
+     * Change these three values for your prototype.
+     */
 
-    // Clean phone input to allow numbers only
-    phoneNumberInput.addEventListener('input', (e) => {
-      e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    });
+    const ACCESS_PASSWORD = "wifiaccessincentive";
 
-    // Step 1 -> Step 2
-    btnSendOtp.addEventListener('click', () => {
-      const phoneVal = phoneNumberInput.value.trim();
-      if (phoneVal.length < 10) {
-        alert('Please enter a valid 10-digit phone number.');
+    const WIFI_NAME = "Bote2WiFi";
+
+    const WIFI_PASSWORD = "unodostreskwatro";
+
+
+    // ==========================================
+    // Get page elements
+    // ==========================================
+
+    const stepPassword =
+      document.getElementById("step-password");
+
+    const stepWifi =
+      document.getElementById("step-wifi");
+
+    const accessPasswordInput =
+      document.getElementById("access-password");
+
+    const unlockButton =
+      document.getElementById("btn-unlock");
+
+    const errorMessage =
+      document.getElementById("error-message");
+
+    const wifiName =
+      document.getElementById("wifi-name");
+
+    const wifiPassword =
+      document.getElementById("wifi-password");
+
+    const copyButton =
+      document.getElementById("btn-copy");
+
+    const copyMessage =
+      document.getElementById("copy-message");
+
+    const backButton =
+      document.getElementById("btn-back");
+
+
+    // ==========================================
+    // Display WiFi information
+    // ==========================================
+
+    wifiName.textContent = WIFI_NAME;
+
+    wifiPassword.textContent = WIFI_PASSWORD;
+
+
+    // ==========================================
+    // Unlock WiFi
+    // ==========================================
+
+    unlockButton.addEventListener(
+      "click",
+      unlockWiFi
+    );
+
+
+    // Allow Enter key
+
+    accessPasswordInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+
+          unlockWiFi();
+
+        }
+
+      }
+    );
+
+
+    function unlockWiFi() {
+
+      const enteredPassword =
+        accessPasswordInput.value.trim();
+
+
+      // Empty password
+
+      if (enteredPassword === "") {
+
+        errorMessage.textContent =
+          "Please enter the access password.";
+
+        errorMessage.classList.add("show");
+
         return;
       }
 
-      stepRequest.classList.remove('active');
-      stepVerify.classList.add('active');
 
-      // Clear any previous inputs and focus on first box
-      otpInputs.forEach(input => input.value = '');
-      setTimeout(() => otpInputs[0].focus(), 150);
-    });
+      // Check password
 
-    // Handle automatic focus jumps for sequential OTP input boxes
-    otpInputs.forEach((input, index) => {
-      input.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      if (enteredPassword === ACCESS_PASSWORD) {
 
-        // If user typed a number, advance focus to the next field
-        if (e.target.value !== '' && index < otpInputs.length - 1) {
-          otpInputs[index + 1].focus();
-        }
-      });
+        errorMessage.classList.remove("show");
 
-      // Handle backspace focus behavior
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
-          otpInputs[index - 1].focus();
-        }
-      });
-    });
+        stepPassword.classList.remove("active");
 
-    // Step 2 -> Step 3 (Verification Check)
-    btnVerifyOtp.addEventListener('click', () => {
-      let enteredOTP = '';
-      otpInputs.forEach(input => enteredOTP += input.value);
+        stepWifi.classList.add("active");
 
-      if (enteredOTP.length < 4) {
-        alert('Please enter the full 4-digit code.');
-        return;
+        accessPasswordInput.value = "";
+
+      } else {
+
+        errorMessage.textContent =
+          "Incorrect password. Please try again.";
+
+        errorMessage.classList.add("show");
+
+        accessPasswordInput.value = "";
+
+        accessPasswordInput.focus();
+
       }
 
-      // Progression to active connection screen
-      stepVerify.classList.remove('active');
-      stepSuccess.classList.add('active');
-    });
+    }
 
-    // Back navigation
-    btnBack.addEventListener('click', () => {
-      stepVerify.classList.remove('active');
-      stepRequest.classList.add('active');
-    });
+
+    // ==========================================
+    // Copy WiFi password
+    // ==========================================
+
+    copyButton.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await navigator.clipboard.writeText(
+            WIFI_PASSWORD
+          );
+
+          copyMessage.classList.add("show");
+
+          setTimeout(function() {
+
+            copyMessage.classList.remove("show");
+
+          }, 2500);
+
+        } catch (error) {
+
+          alert(
+            "Unable to copy automatically. " +
+            "Please type the password manually."
+          );
+
+        }
+
+      }
+    );
+
+
+    // ==========================================
+    // Lock WiFi details
+    // ==========================================
+
+    backButton.addEventListener(
+      "click",
+      function() {
+
+        stepWifi.classList.remove("active");
+
+        stepPassword.classList.add("active");
+
+        copyMessage.classList.remove("show");
+
+        accessPasswordInput.focus();
+
+      }
+    );
+
   </script>
+
 </body>
 </html>
